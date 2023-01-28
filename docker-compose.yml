@@ -1,0 +1,21 @@
+version: '3.7'
+services:
+  item-app:
+    image: usupsuparma/item-app:v1
+    ports:
+      - "80:8080"
+    restart: on-failure
+    depends_on:
+      - item-db
+    networks:
+      - itemnetwork
+  item-db:
+    image: mongo:3
+    volumes:
+      - app-db:/data/db
+    networks:
+      - itemnetwork
+volumes:
+  app-db:
+networks:
+  itemnetwork:
